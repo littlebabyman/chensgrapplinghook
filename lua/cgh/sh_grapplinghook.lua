@@ -10,7 +10,8 @@ cvars.AddChangeCallback("cgh_power", function() power = GetConVar("cgh_power"):G
 -- cvars.AddChangeCallback("cgh_falldamage", function() mult = GetConVar("cgh_falldamage"):GetInt() end)
 
 hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
-    if mv:KeyPressed(IN_USE) then
+    if !(ply:Alive()) then return end
+    if mv:KeyPressed(IN_USE) && !ply:InVehicle() then
         trace = util.TraceLine({
             start = ply:EyePos(),
             endpos = ply:EyePos() + ply:GetAimVector() * dist,
@@ -23,7 +24,7 @@ hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
         sound.Play("NPC_Combine.Zipline_Start", trace.HitPos, 75, 100, 1)
         ply:EmitSound("NPC_Combine.Zipline_MidClothing")
     end
-    if trace.Hit then
+    if trace.Hit && ply:GetMoveType() == MOVETYPE_WALK then
         if mv:KeyDown(IN_USE) && CurTime() > ct then
             vel = (dir - ply:EyePos()) * power / dist * 0.5 / trace.Fraction
             ResetCurTime()
