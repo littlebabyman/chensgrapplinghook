@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 hook.Add("PopulateToolMenu", "chensgrapplinghook", function()
     spawnmenu.AddToolMenuOption("Options", "#cgh.menu.name", "chensgrapplinghook", "Settings", "", "", function(panel)
         -- DForm:Help("#cgh.menu.name")
