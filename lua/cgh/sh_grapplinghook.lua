@@ -17,7 +17,7 @@ hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
             filter = {ply},
         })
         if !trace.Hit then return end
-        ply.grappling = true
+        -- ply.grappling = true
         ResetCurTime()
         dir = trace.HitPos
         sound.Play("NPC_Combine.Zipline_Start", trace.HitPos, 75, 100, 1)
@@ -31,7 +31,7 @@ hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
             debugoverlay.Line(dir, ply:EyePos(), 0.1)
             print(vel, mv:GetVelocity():Length())
         elseif mv:KeyReleased(IN_USE) then
-            ply.grappling = false
+            -- ply.grappling = false
             ply:EmitSound("d1_town.CarRelease")
         end
     end
