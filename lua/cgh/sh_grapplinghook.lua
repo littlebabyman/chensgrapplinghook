@@ -5,10 +5,15 @@ local trace = {}
 local vel = Vector()
 local dist, power = GetConVar("cgh_distance"):GetInt(), GetConVar("cgh_power"):GetInt()
 local fd = GetConVar("cgh_falldamage"):GetBool()
+local key
 local function ResetCurTime() ct = CurTime() + engine.TickInterval() end
 cvars.AddChangeCallback("cgh_distance", function() dist = GetConVar("cgh_distance"):GetInt() end)
 cvars.AddChangeCallback("cgh_power", function() power = GetConVar("cgh_power"):GetInt() end)
 cvars.AddChangeCallback("cgh_falldamage", function() mult = GetConVar("cgh_falldamage"):GetInt() end)
+if CLIENT then
+    key = input.GetKeyCode(GetConVar("cgh_key"):GetString())
+    cvars.AddChangeCallback("cgh_key", function() key = input.GetKeyCode(GetConVar("cgh_key"):GetString()) end)
+end
 
 hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
     if !ply:IsValid() or !IsFirstTimePredicted() then return end
