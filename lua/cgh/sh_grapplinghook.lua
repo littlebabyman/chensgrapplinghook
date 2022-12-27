@@ -11,7 +11,7 @@ cvars.AddChangeCallback("cgh_power", function() power = GetConVar("cgh_power"):G
 cvars.AddChangeCallback("cgh_falldamage", function() mult = GetConVar("cgh_falldamage"):GetInt() end)
 
 hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
-    if !(ply:IsValid()) then return end
+    if !ply:IsValid() or !IsFirstTimePredicted() then return end
     if mv:KeyPressed(IN_USE) && !ply:InVehicle() then
         trace = util.TraceLine({
             start = ply:EyePos(),
