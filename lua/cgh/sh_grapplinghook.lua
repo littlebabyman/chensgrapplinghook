@@ -16,6 +16,7 @@ if CLIENT then
 end
 
 hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
+    -- print(mv:GetVelocity())
     if !ply:IsValid() or !IsFirstTimePredicted() then return end
     if mv:KeyPressed(33554432) && !ply:InVehicle() then
         trace = util.TraceLine({
