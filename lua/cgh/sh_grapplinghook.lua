@@ -32,8 +32,8 @@ hook.Add("SetupMove", "chensgrapplinghook", function(ply, mv, cmd)
         ply:EmitSound("NPC_Combine.Zipline_MidClothing")
     end
     if trace.Hit && ply:GetMoveType() == MOVETYPE_WALK then
-        if mv:KeyDown(33554432) && CurTime() > ct then
-            vel = (dir - ply:EyePos()) * power / dist * 0.5 / trace.Fraction
+        if mv:KeyDown(33554432) then
+            vel = (dir - ply:EyePos()):GetNormalized() * power
             ResetCurTime()
             mv:SetVelocity(mv:GetVelocity() + vel)
             debugoverlay.Line(dir, ply:EyePos(), 0.1)
